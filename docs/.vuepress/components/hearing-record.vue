@@ -191,7 +191,7 @@ export default {
     }
 }
 </script>
-<style lang="sass">
+<style lang="scss">
 .contenteditable-wrap {
     min-height: 100%;
 

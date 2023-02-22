@@ -10,7 +10,8 @@
     "build": "npm run clean &&  rollup -c scripts/rollup.config.prod.js",
     "build:c": "npm run clean &&  rollup -c scripts/rollup.config.build.js",
     "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vuepress build docs",
+    "deploy": "bash deploy.sh"
   },
   "author": "zxm",
   "files": [
@@ -31,7 +32,7 @@
     "@rollup/plugin-replace": "^5.0.2",
     "autoprefixer": "^10.4.13",
     "glob": "^8.1.0",
-    "node-sass": "^8.0.0",
+    "node-sass": "^6.0.1",
     "rollup": "^2.79.1",
     "rollup-plugin-filesize": "^9.1.2",
     "rollup-plugin-livereload": "^2.0.5",
@@ -39,9 +40,10 @@
     "rollup-plugin-scss": "^3.0.0",
     "rollup-plugin-serve": "^2.0.2",
     "rollup-plugin-vue2": "^0.8.1",
-    "sass-loader": "^13.2.0",
+    "sass-loader": "^7.0.3",
     "uglify-es": "^3.3.9",
-    "vuepress": "^1.9.8"
+    "vuepress": "^1.9.8",
+    "webpack": "^4.42.0"
   },
   "dependencies": {
     "vue": "^2.7.14"
