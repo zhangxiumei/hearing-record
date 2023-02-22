@@ -1,0 +1,45 @@
+body,
+html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0; }
+  body #app,
+  html #app {
+    width: 100%;
+    height: 100%; }
+
+ul,
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+
+.contenteditable-wrap {
+  min-height: 100%; }
+  .contenteditable-wrap .canvas {
+    position: absolute;
+    z-index: -2;
+    opacity: 0; }
+
+[contenteditable] {
+  outline: none; }
+
+[contenteditable]:focus {
+  outline: none; }
+
+.contenteditable {
+  text-align: left; }
+  .contenteditable p {
+    margin: 0; }
+  .contenteditable.quesition {
+    color: red; }
+  .contenteditable.answer {
+    color: blue; }
+  .contenteditable.quesition, .contenteditable.answer {
+    overflow: hidden; }
+    .contenteditable.quesition .left, .contenteditable.answer .left {
+      float: left; }
+    .contenteditable.quesition .con, .contenteditable.answer .con {
+      margin-left: 32px; }
