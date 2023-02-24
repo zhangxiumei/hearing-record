@@ -1,22 +1,11 @@
-<template>
-    <div>
-        <div class="contenteditable-wrap" :style="{ background: 'url(' + linebg + ') repeat' }">
-            <canvas ref="canvas" class="canvas"></canvas>
-            <div class="contenteditable" contenteditable="true" v-for="(item, index) in filterList"
-                @input="handleInputEvent($event, index)" @blur="handleBlurEvent($event, index)"
-                :class="{ quesition: item.type == 1, answer: item.type == 2 }" :style="{ lineHeight: lineHeight + 'px' }"
-                @keydown="addItem($event, index)" :ref="'contenteditable' + index" :index="index" :key="item.key">
-                <span v-show="item.type == 1 || item.type == 2" class="left">{{
-                    item.type == 1 ? '问：' : item.type == 2 ? '答：' :
-                    ''
-                }}</span>
-                <div class="con">{{ item.str }}</div>
-            </div>
-        </div>
-    </div>
-</template>
-<script>
-export default {
+/*!
+ * hearing-record.js v1.0.6
+ * Released under the MIT License.
+ */
+var hearingRecord = {
+render: function(){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"contenteditable-wrap",style:({ background: 'url(' + _vm.linebg + ') repeat' })},[_c('canvas',{ref:"canvas",staticClass:"canvas"}),_vm._v(" "),_vm._l((_vm.filterList),function(item,index){return _c('div',{key:item.key,ref:'contenteditable' + index,refInFor:true,staticClass:"contenteditable",class:{ quesition: item.type == 1, answer: item.type == 2 },style:({ lineHeight: _vm.lineHeight + 'px' }),attrs:{"contenteditable":"true","index":index},on:{"input":function($event){return _vm.handleInputEvent($event, index)},"blur":function($event){return _vm.handleBlurEvent($event, index)},"keydown":function($event){return _vm.addItem($event, index)}}},[_c('span',{directives:[{name:"show",rawName:"v-show",value:(item.type == 1 || item.type == 2),expression:"item.type == 1 || item.type == 2"}],staticClass:"left"},[_vm._v(_vm._s(item.type == 1 ? '问：' : item.type == 2 ? '答：' :
+                ''))]),_vm._v(" "),_c('div',{staticClass:"con"},[_vm._v(_vm._s(item.str))])])})],2)])},
+staticRenderFns: [],
     name: 'hearing-record',
     props: {
         list: {
@@ -43,19 +32,19 @@ export default {
                         str: element.replace(/^问\：/, ''),
                         type: 1,
                         key: parseInt(Math.random() * 1000 + 1)
-                    })
+                    });
                 } else if (element.match(patt2)) {
                     newlist.push({
                         str: element.replace(/^答\：/, ''),
                         type: 2,
                         key: parseInt(Math.random() * 1000 + 1)
-                    })
+                    });
                 } else if (element) {
                     newlist.push({
                         str: element,
                         type: 3,
                         key: parseInt(Math.random() * 1000 + 1)
-                    })
+                    });
                 }
             });
             return newlist
@@ -78,21 +67,21 @@ export default {
 
         },
         initCancas() {
-            var canvas = this.$refs.canvas
+            var canvas = this.$refs.canvas;
             if (!canvas) {
                 return false;
             } else {
-                let width = window.innerWidth
-                let height = this.lineHeight
-                canvas.width = width
-                canvas.height = height
-                let ctx = canvas.getContext("2d")
-                ctx.moveTo(0, height)
-                ctx.lineTo(canvas.width, height)
-                ctx.lineWidth = '0.5'
-                ctx.strokeStyle = 'blue'
+                let width = window.innerWidth;
+                let height = this.lineHeight;
+                canvas.width = width;
+                canvas.height = height;
+                let ctx = canvas.getContext("2d");
+                ctx.moveTo(0, height);
+                ctx.lineTo(canvas.width, height);
+                ctx.lineWidth = '0.5';
+                ctx.strokeStyle = 'blue';
                 ctx.stroke();
-                this.linebg = ctx.canvas.toDataURL()
+                this.linebg = ctx.canvas.toDataURL();
             }
         },
         addItem(event, index) {
@@ -104,10 +93,10 @@ export default {
                 } else {
                     this.list.splice(index + 1, 0, '答：');
                 }
-                this.$refs['contenteditable' + index][0].blur()
+                this.$refs['contenteditable' + index][0].blur();
                 this.$nextTick(() => {
-                    this.keepLastIndex(this.$refs['contenteditable' + (index + 1)][0])
-                })
+                    this.keepLastIndex(this.$refs['contenteditable' + (index + 1)][0]);
+                });
             }
         },
         keepLastIndex(obj) {
@@ -166,76 +155,31 @@ export default {
             }
         },
         addQuesition(event, index) {
-            let list = this.quesitionList[index]
+            let list = this.quesitionList[index];
             let cindex = this.list.length, isSame = false;
             this.list.forEach((c, index) => {
                 if (c == ('问：' + list[0])) {
                     layer.confirm('已经加过同样的问题，还要加吗?', { icon: 3, title: '提示' }, (index) => {
                         //do something
-                        this.list.splice(cindex, 0, '问：' + list[0], '答：' + list[1])
+                        this.list.splice(cindex, 0, '问：' + list[0], '答：' + list[1]);
                         layer.close(index);
                     });
                     isSame = true;
 
                 }
-            })
-            if (!isSame) this.list.splice(cindex, 0, '问：' + list[0], '答：' + list[1])
+            });
+            if (!isSame) this.list.splice(cindex, 0, '问：' + list[0], '答：' + list[1]);
             return;
 
         }
     },
     mounted() {
-        this.initCancas()
+        this.initCancas();
     }
-}
-</script>
-<style lang="scss">
-.contenteditable-wrap {
-    min-height: 100%;
+};
 
-    .canvas {
-        position: absolute;
-        z-index: -2;
-        opacity: 0;
-    }
-}
+hearingRecord.install = function (Vue) {
+  Vue.component(hearingRecord.name, hearingRecord);
+};
 
-[contenteditable] {
-    outline: none;
-}
-
-[contenteditable]:focus {
-
-    outline: none;
-}
-
-.contenteditable {
-    text-align: left;
-
-    p {
-        margin: 0
-    }
-
-    &.quesition {
-        color: red
-    }
-
-    &.answer {
-        color: blue
-    }
-
-    &.quesition,
-    &.answer {
-        overflow: hidden;
-
-        .left {
-            float: left;
-        }
-
-        .con {
-            margin-left: 32px;
-        }
-    }
-
-}
-</style>
+export { hearingRecord as default };

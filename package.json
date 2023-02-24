@@ -1,6 +1,6 @@
 {
   "name": "hearing-record",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "vue审讯笔录组件库",
   "main": "dist/index.js",
   "scripts": {
@@ -16,7 +16,7 @@
   "author": "zxm",
   "files": [
     "dist",
-    "src",
+    "src/components",
     "scripts"
   ],
   "license": "ISC",

@@ -1,6 +1,6 @@
 # 审讯笔录组件
 
- <hearing-record :list="['问：第一问', '答：第一答']"></hearing-record>
+ <hearing-record :list='["问：","答："]'></hearing-record>
 
   ### Attributes
  | 参数  |  说明  | 类型 | 是否必要 | 默认值|

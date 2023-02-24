@@ -21,6 +21,7 @@ export default {
     props: {
         list: {
             type: Array,
+            default: ['1', '2']
         }
     },
     data: function () {
@@ -57,9 +58,7 @@ export default {
                     })
                 }
             });
-            this.$nextTick(() => {
-                console.log(this.filterList)
-            })
+
             return newlist
         }
     },
